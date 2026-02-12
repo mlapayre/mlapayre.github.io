@@ -1,9 +1,10 @@
 :root {
-  --accent: #0078d7;
-  --bg: #f7f9fc;
-  --text: #1b1f23;
+  --accent: #37366b;
+  --bg: #320836;
+  --text: #d3e5f7;
+  --text2: #320836;
   --muted: #6b7280;
-  --card: #ffffff;
+  --card: #7e5775;
   --radius: 12px;
   font-family: "Inter", system-ui, sans-serif;
   scroll-behavior: smooth;
@@ -111,7 +112,7 @@ body.dark-mode .theme-toggle:hover {
 }
 
 section {
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -216,7 +217,7 @@ body.dark-mode .hero-content {
   font-size: 3.5rem;
   font-weight: 700;
   margin-bottom: 16px;
-  color: var(--text);
+  color: var(--text2);
   letter-spacing: -1px;
 }
 
@@ -261,15 +262,15 @@ body.dark-mode .hero-content {
 }
 
 .btn-primary {
-  background: var(--accent);
+  background: var(--card);
   color: #ffffff;
 }
 
 .btn-primary:hover {
   background: var(--text);
-  color: #ffffff;
+  color: #9e7d94;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 120, 215, 0.5);
+  box-shadow: 0 6px 20px rgba(80, 0, 49, 0.5);
 }
 
 .btn-secondary {

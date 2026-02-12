@@ -1,24 +1,4 @@
 
-// --- Couleurs accent aléatoires ---
-const accentColors = [
-  '#0078d7',
-  '#e74c3c',
-  '#2E8B57',
-  '#9b59b6',
-  '#f39c12',
-  '#1abc9c',
-  '#e91e63',
-  '#00bcd4',
-  '#ff5722',
-  '#607d8b'
-];
-
-function setRandomAccentColor() {
-  const randomColor = accentColors[Math.floor(Math.random() * accentColors.length)];
-  document.documentElement.style.setProperty('--accent', randomColor);
-}
-setRandomAccentColor();
-
 // --- Menu burger ---
 const burgerBtn = document.getElementById('burger-btn');
 const menu = document.getElementById('menu');
@@ -84,108 +64,6 @@ themeToggle.addEventListener("click", () => {
   }
 });
 
-// --- Canvas animation avec couleurs adaptées au thème ---
-const canvas = document.querySelector('#accueil #canvas');
-const ctx = canvas.getContext('2d');
-
-function resizeCanvas() {
-  canvas.width = canvas.clientWidth;
-  canvas.height = canvas.clientHeight;
-}
-
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-function drawBranch(ctx, x, y, length, angle, flip = false) {
-  ctx.save();
-  ctx.translate(x, y);
-  if (flip) ctx.scale(-1, 1);
-
-  const isDarkMode = body.classList.contains('dark-mode');
-  const branchColor = isDarkMode ? '#4a7c6f' : '#5a8b7f';
-  const leafColors = isDarkMode
-    ? ['#5a8b7f', '#6b9a8d', '#3a7065', '#7cb8aa', '#4a8d7f']
-    : ['#6ba89d', '#8bc9bf', '#4a8b7f', '#9dd4ca', '#5a9d91'];
-
-  ctx.strokeStyle = branchColor;
-  ctx.lineWidth = 4;
-  ctx.lineCap = 'round';
-  ctx.globalAlpha = 0.6;
-
-  ctx.beginPath();
-  ctx.moveTo(0, 0);
-  ctx.quadraticCurveTo(length * 0.5, -length * 0.2, length, -length * 0.4);
-  ctx.stroke();
-
-  const leaves = [
-    { x: length * 0.2, y: -length * 0.1, rot: -0.5, scale: 1 },
-    { x: length * 0.35, y: -length * 0.15, rot: -0.3, scale: 0.9 },
-    { x: length * 0.25, y: -length * 0.2, rot: -0.7, scale: 1.1 },
-    { x: length * 0.5, y: -length * 0.25, rot: -0.4, scale: 1 },
-    { x: length * 0.6, y: -length * 0.28, rot: -0.2, scale: 0.95 },
-    { x: length * 0.7, y: -length * 0.32, rot: -0.5, scale: 1.05 },
-    { x: length * 0.8, y: -length * 0.35, rot: -0.3, scale: 0.9 },
-    { x: length * 0.9, y: -length * 0.38, rot: -0.4, scale: 1 },
-  ];
-
-  ctx.globalAlpha = 0.75;
-  leaves.forEach((leaf, i) => {
-    ctx.save();
-    ctx.translate(leaf.x, leaf.y);
-    ctx.rotate(leaf.rot);
-    ctx.scale(leaf.scale, leaf.scale);
-    ctx.fillStyle = leafColors[i % leafColors.length];
-    ctx.beginPath();
-    ctx.ellipse(0, 0, 35, 15, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.restore();
-  });
-
-  ctx.restore();
-}
-
-let time = 0;
-
-function animate() {
-  const isDarkMode = body.classList.contains('dark-mode');
-
-  const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-  if (isDarkMode) {
-    gradient.addColorStop(0, '#1a2635');
-    gradient.addColorStop(0.5, '#0f1825');
-    gradient.addColorStop(1, '#162030');
-  } else {
-    gradient.addColorStop(0, '#e8f5f3');
-    gradient.addColorStop(0.5, '#d4e9e6');
-    gradient.addColorStop(1, '#f0f8f7');
-  }
-
-  ctx.fillStyle = gradient;
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  time += 0.02;
-
-  const sway = Math.sin(time) * 0.08;
-  const swayY = Math.cos(time * 0.7) * 5;
-
-  ctx.save();
-  ctx.translate(150 + swayY * 2, 180 + swayY);
-  ctx.rotate(sway * 0.5);
-  drawBranch(ctx, 0, 0, 350, 0);
-  ctx.restore();
-
-  ctx.save();
-  ctx.translate(canvas.width - 150 + swayY * 2, canvas.height - 250 + swayY);
-  ctx.rotate(-sway * 0.5);
-  ctx.scale(-1, -1);
-  drawBranch(ctx, 0, 0, 350, 0);
-  ctx.restore();
-
-  requestAnimationFrame(animate);
-}
-
-animate();
-
 // --- Menu actif au scroll ---
 const menuLinks = document.querySelectorAll('.menu a');
 
@@ -201,149 +79,20 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// --- Modales formations ---
-const formations = {
-  bac: {
-  titre: "Baccalauréat scientifique, option Systèmes d'information et numérique",
-  etablissement: "Lycée polyvalent Les Iris",
-  image: "images/bac.jpg",
-  annee: "2020 - 2023",
-  parcours: [
-    "Série scientifique avec spécialités mathématiques et physique-chimie",
-    "Cambridge English Certificate (CEC) obtenu avec le niveau C1",
-    "Baccalauréat obtenu avec mention"
-  ],
-  competences: [
-    "Mathématiques et logique algorithmique",
-    "Bases du développement web (HTML/CSS) et de la programmation électronique (Arduino)",
-    "Bases des réseaux (protocoles et adressage IP)",
-    "ERASMUS : anglais courant"
-  ]
-},
-  but: {
-    titre: "BUT Informatique",
-    etablissement: "IUT Gradignan",
-    image: "images/but.jpg",
-    annee: "2023 - actuellement",
-    parcours: [
-      "Formation axée sur le développement d'application",
-      "Conception d'applications orientée objet",
-      "Gestion de projet avec méthodologies Agile",
-      "Stages en entreprise",
-      "Plus encore..."
-      
-    ],
-    competences: [
-      "Développement full-stack (Frontend/Backend)",
-      "Architecture logicielle et design patterns",
-      "Systèmes et Réseaux approfondis",
-      "Gestion de bases de données relationnelles",
-      "Travail en équipe et communication professionnelle"
-    ]
-  },
-  poursuite: {
-    titre: "Master en Réseaux & Télécommunications",
-    etablissement: "À définir (Master Réseau)",
-    image: "images/master.jpg",
-    annee: "2026+",
-    parcours: [
-      "Poursuite d'études en Master Informatique spécialité Réseaux",
-      "Approfondissement en architecture réseau et sécurité",
-      "Possibilité d'alternance en entreprise",
-      "Préparation à des certifications réseau (CCNA, etc.)"
-    ],
-    competences: [
-      "Architecture et administration de réseaux complexes",
-      "Sécurité informatique et protocoles avancés",
-      "Cloud computing et virtualisation",
-      "Leadership et expertise technique"
-    ]
-  }
-};
-
-const modal = document.getElementById("formation-modal");
-const modalTitle = document.getElementById("modal-title");
-const modalBody = document.getElementById("modal-body");
-const closeModal = document.getElementById("close-modal");
-
-document.querySelectorAll(".timeline-item").forEach(item => {
-  item.addEventListener("click", () => {
-    const key = item.dataset.modal;
-    const formation = formations[key];
-
-    const modal = document.getElementById("formation-modal");
-    const modalContent = document.querySelector('#formation-modal .modal-content');
-
-    modalContent.innerHTML = `
-      <div class="formation-modal-header">
-        <h3>${formation.titre}</h3>
-        <button id="close-formation-modal" class="close-btn">✕</button>
-      </div>
-      
-      <div class="formation-modal-image">
-        <img src="${formation.image}" alt="${formation.titre}" onerror="this.style.display='none'">
-      </div>
-      
-      <div class="formation-modal-body">
-        <div class="formation-info-bar">
-          <div class="info-item">
-            <span class="info-label">Établissement</span>
-            <p class="info-value">${formation.etablissement}</p>
-          </div>
-          <div class="info-item">
-            <span class="info-label">Période</span>
-            <p class="info-value">${formation.annee}</p>
-          </div>
-        </div>
-        
-        <div class="formation-content-grid">
-          <div class="formation-section">
-            <h4>📚 Parcours</h4>
-            <ul>
-              ${formation.parcours.map(item => `<li>${item}</li>`).join('')}
-            </ul>
-          </div>
-          
-          <div class="formation-section">
-            <h4>💡 Compétences acquises</h4>
-            <ul>
-              ${formation.competences.map(comp => `<li>${comp}</li>`).join('')}
-            </ul>
-          </div>
-        </div>
-      </div>
-      
-      <div class="formation-modal-footer">
-        <p class="footer-text">Formation enrichissante et structurante pour mon parcours professionnel</p>
-      </div>
-    `;
-
-    modal.classList.add("show");
-
-    document.getElementById('close-formation-modal').addEventListener('click', () => {
-      modal.classList.remove("show");
-    });
-  });
-});
-
-closeModal.addEventListener("click", () => modal.classList.remove("show"));
-modal.addEventListener("click", e => {
-  if (e.target === modal) modal.classList.remove("show");
-});
 
 // --- Données des projets ---
 const projectsData = [
   {
     id: 1,
-    title: "Application Java de Gestion",
-    description: "Interface graphique Swing pour la gestion de tâches",
+    title: "FootBot League",
+    description: "Site web de gestion de tournoi de football de robot.",
     image: "images/projet1.jpg",
-    tags: ["programmation logicielle"],
+    tags: ["oop","database","management"],
     github: "https://github.com/votre-username/gestion-taches-java",
     fullDescription: {
       resume: "Développement d'une application de bureau complète permettant la gestion de tâches avec une interface graphique intuitive. Le projet incluait la création d'un système de suivi des tâches, la gestion des priorités et des échéances, ainsi qu'un système de notifications.",
-      outils: ["Java 17", "Swing pour l'interface graphique", "MySQL pour la base de données", "JDBC pour la connexion", "Maven pour la gestion des dépendances", "Git pour le versioning"],
-      competences: ["Maîtrise de l'architecture MVC", "Conception d'interfaces utilisateur ergonomiques", "Gestion de bases de données relationnelles", "Programmation orientée objet avancée", "Tests unitaires avec JUnit", "Documentation technique complète"]
+      outils: ["MySql", "Symfony", "PHPMyadmin", "VSCode", "Git", "Méthodologie scrum"],
+      competences: ["Gestion de base de données", "Méthodologies agiles", "Gestion de bases de données relationnelles", "Programmation orientée objet avancée", "Tests unitaires avec JUnit", "Documentation technique complète"]
     }
   },
   {
@@ -594,7 +343,7 @@ function openProjectModal(projectId) {
 const aboutContent = {
   presentation: {
     text: `<h3>Petite présentation</h3>
-      <p>Je suis <strong>Zakarya Zekhnini</strong>, étudiant passionné en BUT Informatique. Depuis toujours fasciné par la technologie et l'innovation, j'ai développé une véritable passion pour le développement logiciel et web.</p>
+      <p>Je suis <strong>Mathilde Lapayre</strong>, étudiant passionné en BUT Informatique. Depuis toujours fasciné par la technologie et l'innovation, j'ai développé une véritable passion pour le développement logiciel et web.</p>
       <p>Mon parcours m'a permis d'acquérir des compétences solides en programmation, en conception d'applications et en gestion de projets. J'aime particulièrement relever des défis techniques et transformer des idées en solutions concrètes et fonctionnelles.</p>
       <p>Au-delà du code, je suis quelqu'un de curieux, toujours en quête d'apprentissage et d'amélioration.</p>`,
     image: "images/portrait.jpg"
@@ -604,7 +353,7 @@ const aboutContent = {
       <ul>
         <li><strong>Français</strong> : Langue maternelle</li>
         <li><strong>Anglais</strong> : Niveau B2 - Lecture technique fluide</li>
-        <li><strong>Arabe</strong> : Notions de base</li>
+        <li><strong>Chinois</strong> : Notions de base</li>
       </ul>
       <p>Je suis capable de lire et comprendre la documentation technique en anglais, et de communiquer efficacement dans un contexte professionnel international.</p>`,
     image: "images/langues.jpg"
@@ -637,8 +386,8 @@ const aboutContent = {
       <p>Cette activité m'apprend la persévérance, la rigueur et l'importance de se fixer des objectifs à long terme - des qualités que je transpose dans mon travail de développeur.</p>`,
     image: "images/musculation.jpg"
   },
-  depannage: {
-    text: `<h3>Dépannage PC</h3>
+  couture: {
+    text: `<h3>Couture</h3>
       <p>Depuis mon adolescence, je me passionne pour le dépannage informatique. J'aide régulièrement mon entourage à résoudre leurs problèmes techniques.</p>
       <ul>
         <li>Diagnostic matériel et logiciel</li>
@@ -648,8 +397,8 @@ const aboutContent = {
       </ul>`,
     image: "images/depannage.jpg"
   },
-  electronique: {
-    text: `<h3>Électronique</h3>
+  cinema: {
+    text: `<h3>Cinéma</h3>
       <p>L'électronique est une passion qui complète parfaitement mes compétences en informatique. J'aime comprendre comment fonctionnent les appareils et créer mes propres circuits.</p>
       <p>Je travaille régulièrement avec Arduino et Raspberry Pi pour réaliser des projets personnels alliant programmation et électronique.</p>`,
     image: "images/electronique.jpg"
