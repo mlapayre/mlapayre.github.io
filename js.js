@@ -343,20 +343,26 @@ function openProjectModal(projectId) {
 const aboutContent = {
   presentation: {
     text: `<h3>Petite présentation</h3>
-      <p>Je suis <strong>Mathilde Lapayre</strong>, étudiant passionné en BUT Informatique. Depuis toujours fasciné par la technologie et l'innovation, j'ai développé une véritable passion pour le développement logiciel et web.</p>
-      <p>Mon parcours m'a permis d'acquérir des compétences solides en programmation, en conception d'applications et en gestion de projets. J'aime particulièrement relever des défis techniques et transformer des idées en solutions concrètes et fonctionnelles.</p>
-      <p>Au-delà du code, je suis quelqu'un de curieux, toujours en quête d'apprentissage et d'amélioration.</p>`,
+      <p>Je suis <strong>Mathilde Lapayre</strong>, actuellement étudiante en BUT informatique 
+      et future miagiste. Passionnée de couture, c'est bien évidémment que je me suis tournée
+      vers l'informatique .</p>
+      <p>Après quelques années d'errance professionnelle, j'ai décidé de prendre en main mon futur
+      et ai essayé quelque chose dont je me croyais incapable jusque là : reprendre mes études.
+      L'informatique peut paraître comme un choix peu probable au vu de mon parcours, 
+      mais c'est un domaine qui m'intrigue depuis très longtemps (je me souviens encore du
+      site du zéro...) mais que je n'avais jamais eu le courage de réellement découvrir.</p>
+      <p>Très curieuse, je cherche toujours à apprendre et souhaite mettre mes 
+      connaissances présentes et à venir au service de ma carrière.</p>`,
     image: "images/portrait.jpg"
   },
-  langues: {
-    text: `<h3>Langues</h3>
-      <ul>
-        <li><strong>Français</strong> : Langue maternelle</li>
-        <li><strong>Anglais</strong> : Niveau B2 - Lecture technique fluide</li>
-        <li><strong>Chinois</strong> : Notions de base</li>
-      </ul>
-      <p>Je suis capable de lire et comprendre la documentation technique en anglais, et de communiquer efficacement dans un contexte professionnel international.</p>`,
-    image: "images/langues.jpg"
+  anglais: {
+    text: `<h3>Anglais</h3>
+      <p> Niveau C2 - TOEIC en préparation</p>
+      <p>Je suis capable de lire, écrire et parler en anglais aisément. Mes limites en langage
+      technique sensiblement les mêmes qu'en français.</p>
+      <p>J'ai eu la chance d'être élevée dans un milieu linguistiquement varié, ce qui me permet 
+      d'être à la fois à l'aise avec les langages et les cultures.</p>`,
+      image: "images/langues.jpg"
   },
   communication: {
     text: `<h3>Communication</h3>
